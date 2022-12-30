@@ -37,14 +37,15 @@ app.get("/posts", async (req, res) => {
 app.put("/posts/:id", async (req, res) => {
   try {
     const { id } = req.params;
-
+    console.log(req.body);
     const { description } = req.body;
-    const updateTodo = await pool.query(
+    console.log(id, description);
+    const updatePost = await pool.query(
       "UPDATE finder SET description = $1 WHERE finder_id = $2",
       [description, id]
     );
 
-    res.json("Todo was updated!");
+    res.json("Post is updated!");
   } catch (err) {
     console.error(err.message);
   }
