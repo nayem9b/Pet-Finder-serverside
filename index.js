@@ -50,6 +50,21 @@ app.put("/posts/:id", async (req, res) => {
     console.error(err.message);
   }
 });
+
+// delete the post
+app.delete("/posts/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const deletePost = await pool.query(
+      "DELETE FROM finder WHERE finder_id = $1",
+      [id]
+    );
+    res.json("Post has been deleted!");
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 app.get("/", async (req, res) => {
   res.send("My app is running on homepage");
 });
